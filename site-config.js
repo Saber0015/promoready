@@ -1,5 +1,5 @@
 window.SITE_CONFIG = {
-  brand: 'promoready',
+  brand: 'PromoReady',
   email: 'garyczs015@gmail.com',
   inquiryEndpoint: 'https://formsubmit.co/ajax/garyczs015@gmail.com',
   siteUrl: 'https://saber0015.github.io/promoready/',

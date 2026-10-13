@@ -1,4 +1,4 @@
-# promoready
+# PromoReady
 
 English video production website. Live at https://saber0015.github.io/promoready/
 

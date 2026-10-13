@@ -51,7 +51,7 @@
 
   function prepareBrief() {
     const text = [`${cfg.brand} — Video brief`, `Reply email: ${email.value.trim()}`, selectionText() || 'Package and look: Help me choose.', `Idea / links:\n${idea.value.trim()}`].join('\n\n');
-    const href = `mailto:${cfg.email}?subject=${encodeURIComponent('My promoready video brief')}&body=${encodeURIComponent(text)}`;
+    const href = `mailto:${cfg.email}?subject=${encodeURIComponent(`My ${cfg.brand} video brief`)}&body=${encodeURIComponent(text)}`;
     sendLink.href = href;
     fallbackLink.href = href;
     return text;
@@ -137,7 +137,7 @@
     const payload = {
       email: email.value.trim(), _replyto: email.value.trim(), message: idea.value.trim(),
       package: selectionText() || 'Help me choose', reference,
-      _subject: `promoready inquiry ${reference}`, _honey: honey.value
+      _subject: `${cfg.brand} inquiry ${reference}`, _honey: honey.value
     };
     submitting = true;
     submit.disabled = true;
