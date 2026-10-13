@@ -3,21 +3,21 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="A video production service concept for independent merchants. Explore supplied style references and prepare your first video brief.">
+  <meta name="description" content="Turn your product photos and clips into videos ready to post. Choose a look and a package, from $19.">
   <title>promoready — Your brand, in motion</title>
-  <link rel="stylesheet" href="common.css">
-  <link rel="stylesheet" href="version-a.css">
-  <link rel="stylesheet" href="version-a-refined.css">
+  <link rel="preload" href="assets/dm-sans.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="site.css">
+  <link rel="stylesheet" href="brief.css">
 </head>
-<body data-version="a" data-playback="inline" data-selected="true">
+<body data-version="a" data-playback="inline">
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header" id="top">
     <a class="wordmark" href="#top" aria-label="promoready home">promoready<span class="wordmark-period">.</span></a>
     <nav aria-label="Main navigation">
-      <a href="#looks">The looks</a>
-      <a class="nav-secondary" href="#packages">The offer</a>
-      <a class="nav-secondary" href="#process">The process</a>
-      <button class="nav-brief" type="button" data-brief>Start my video <span aria-hidden="true">↗</span></button>
+      <a href="#looks">Looks</a>
+      <a class="nav-secondary" href="#packages">Pricing</a>
+      <a class="nav-secondary" href="#process">How it works</a>
+      <button class="nav-brief" type="button" data-brief>Start my video <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></button>
     </nav>
   </header>
 
@@ -28,111 +28,103 @@
           <h1 id="hero-title">Your brand,<br><span>in motion.</span></h1>
         </div>
         <div class="hero-copy">
-          <p>Turn your product photos and clips into short videos with a point of view.</p>
-          <p class="hero-detail">You bring the material. We shape the story, edit the film, and get it ready to post.</p>
-          <button class="button button-accent" type="button" data-brief>Start my video <span aria-hidden="true">↗</span></button>
+          <p>Your photos and clips, made into videos ready to post.</p>
+          <button class="button button-accent" type="button" data-brief>Start my video <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></button>
         </div>
       </div>
       <figure class="hero-frame">
-        <button class="hero-play media-trigger" type="button" data-play="outdoor" aria-label="Play outdoor cinematic style reference, 25.01 seconds">
+        <button class="hero-play media-trigger" type="button" data-play="outdoor" aria-label="Play outdoor cinematic film, 25.01 seconds">
           <img src="assets/outdoor.jpg" alt="A person in a red outdoor jacket overlooks a mountain lake and clouds at sunrise." width="600" height="258" fetchpriority="high">
-          <span class="play-lockup"><span class="play-circle" aria-hidden="true"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 4l9 6-9 6z" fill="currentColor"/></svg></span><span class="play-copy">Watch the mood <small>25.01 sec · Style reference</small></span></span>
+          <span class="play-lockup"><span class="play-circle" aria-hidden="true"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 4l9 6-9 6z" fill="currentColor"/></svg></span><span class="play-copy">Watch the film</span></span>
         </button>
-        <figcaption><span>Outdoor cinematic <span class="caption-separator">/</span> 2.33:1</span><span>Supplied style reference · not a client endorsement</span></figcaption>
+        <figcaption>Cinematic</figcaption>
       </figure>
-      <div class="hero-end"><span>Video production for independent brands</span><a href="#looks">Explore the looks <span aria-hidden="true">↓</span></a></div>
     </section>
 
     <section class="looks page-width" id="looks" aria-labelledby="looks-title">
       <div class="looks-heading">
-        <h2 id="looks-title">Different moods.<br>Same intention.</h2>
-        <p>Find a direction that fits your product.<br>These supplied films are references for style, pacing and format.</p>
+        <h2 id="looks-title">Find your look.</h2>
       </div>
       <div class="work-wall">
         <div class="work-group work-group-intro">
           <div class="work-feature"><article class="work work-tech">
-            <button class="sample-play media-trigger ratio-wide" type="button" data-play="tech" aria-label="Play technical product style reference, 30.36 seconds"><img src="assets/tech.jpg" alt="Black power banks float against a light gray background." width="600" height="338" loading="lazy"><span class="sample-play-icon" aria-hidden="true"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 4l9 6-9 6z" fill="currentColor"/></svg></span></button>
-            <div class="work-caption"><div><h3>Make the details matter.</h3><p>Product spotlight · 30.36 sec · 16:9</p></div><button type="button" data-brief data-style="tech" aria-label="Start a video with product spotlight style">Use this look <span aria-hidden="true">↗</span></button></div>
-          </article>
-            <p class="wall-note">A good short video has a clear job: introduce, explain, or invite someone closer.</p></div>
+            <button class="sample-play media-trigger ratio-wide" type="button" data-play="tech" aria-label="Play technical product film, 30.36 seconds"><img src="assets/tech.jpg" alt="Black power banks float against a light gray background." width="600" height="338" loading="lazy"><span class="sample-play-icon" aria-hidden="true"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 4l9 6-9 6z" fill="currentColor"/></svg></span></button>
+            <div class="work-caption"><div><h3>Product spotlight</h3></div><button type="button" data-brief data-style="tech" aria-label="Start a video with product spotlight style">Use this look <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></button></div>
+          </article></div>
           <div class="work-portraits"><article class="work">
-            <button class="sample-play media-trigger ratio-portrait" type="button" data-play="ugc" aria-label="Play social product demonstration style reference, 23.50 seconds"><img src="assets/ugc.jpg" alt="A woman holds a lip product in a casual home setting with the original product subtitle visible." width="600" height="1067" loading="lazy"><span class="sample-play-icon" aria-hidden="true"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 4l9 6-9 6z" fill="currentColor"/></svg></span></button>
-            <div class="work-caption"><div><h3>Keep it close.</h3><p>Social demo · 23.50 sec · 9:16</p></div><button type="button" data-brief data-style="ugc" aria-label="Start a video with social demonstration style">Use this look <span aria-hidden="true">↗</span></button></div>
+            <button class="sample-play media-trigger ratio-portrait" type="button" data-play="ugc" aria-label="Play social product demonstration film, 23.50 seconds"><img src="assets/ugc.jpg" alt="A woman holds a lip product in a casual home setting with the product subtitle visible." width="600" height="1067" loading="lazy"><span class="sample-play-icon" aria-hidden="true"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 4l9 6-9 6z" fill="currentColor"/></svg></span></button>
+            <div class="work-caption"><div><h3>Social demo</h3></div><button type="button" data-brief data-style="ugc" aria-label="Start a video with social demonstration style">Use this look <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></button></div>
           </article>
 <article class="work">
-            <button class="sample-play media-trigger ratio-portrait" type="button" data-play="lifestyle" aria-label="Play lifestyle style reference, 16.34 seconds"><img src="assets/lifestyle.jpg" alt="An orange cat walks beside white sneakers on a city sidewalk." width="600" height="1067" loading="lazy"><span class="sample-play-icon" aria-hidden="true"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 4l9 6-9 6z" fill="currentColor"/></svg></span></button>
-            <div class="work-caption"><div><h3>A little everyday charm.</h3><p>Lifestyle · 16.34 sec · 9:16</p></div><button type="button" data-brief data-style="lifestyle" aria-label="Start a video with lifestyle style">Use this look <span aria-hidden="true">↗</span></button></div>
+            <button class="sample-play media-trigger ratio-portrait" type="button" data-play="lifestyle" aria-label="Play everyday lifestyle film, 16.34 seconds"><img src="assets/lifestyle.jpg" alt="An orange cat walks beside white sneakers on a city sidewalk." width="600" height="1067" loading="lazy"><span class="sample-play-icon" aria-hidden="true"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 4l9 6-9 6z" fill="currentColor"/></svg></span></button>
+            <div class="work-caption"><div><h3>Everyday lifestyle</h3></div><button type="button" data-brief data-style="lifestyle" aria-label="Start a video with lifestyle style">Use this look <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></button></div>
           </article></div>
         </div>
         <div class="work-group work-group-story">
           <div class="work-feature"><article class="work work-story">
-            <button class="sample-play media-trigger ratio-wide" type="button" data-play="story" aria-label="Play narrative style reference, 30.60 seconds"><img src="assets/story.jpg" alt="A woman with a black shoulder bag walks between bookshelves in a library; the supplied production credit is visible." width="600" height="338" loading="lazy"><span class="sample-play-icon" aria-hidden="true"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 4l9 6-9 6z" fill="currentColor"/></svg></span></button>
-            <div class="work-caption"><div><h3>Give the product a world.</h3><p>Brand story · 30.60 sec · 16:9</p></div><button type="button" data-brief data-style="story" aria-label="Start a video with brand story style">Use this look <span aria-hidden="true">↗</span></button></div>
+            <button class="sample-play media-trigger ratio-wide" type="button" data-play="story" aria-label="Play narrative film, 30.60 seconds"><img src="assets/story.jpg" alt="A woman with a black shoulder bag walks between bookshelves in a library." width="600" height="338" loading="lazy"><span class="sample-play-icon" aria-hidden="true"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 4l9 6-9 6z" fill="currentColor"/></svg></span></button>
+            <div class="work-caption"><div><h3>Brand story</h3></div><button type="button" data-brief data-style="story" aria-label="Start a video with brand story style">Use this look <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></button></div>
           </article></div>
           <div class="work-detail"><article class="work">
-            <button class="sample-play media-trigger ratio-product" type="button" data-play="performance" aria-label="Play performance product style reference, 50.13 seconds"><img src="assets/performance.jpg" alt="A blue and white performance running shoe is shown in profile against a dark blue background." width="600" height="800" loading="lazy"><span class="sample-play-icon" aria-hidden="true"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 4l9 6-9 6z" fill="currentColor"/></svg></span></button>
-            <div class="work-caption"><div><h3>Put the craft on show.</h3><p>Feature film · 50.13 sec · 3:4</p></div><button type="button" data-brief data-style="performance" aria-label="Start a video with performance product style">Use this look <span aria-hidden="true">↗</span></button></div>
+            <button class="sample-play media-trigger ratio-product" type="button" data-play="performance" aria-label="Play performance product film, 50.13 seconds"><img src="assets/performance.jpg" alt="A blue and white performance running shoe is shown in profile against a dark blue background." width="600" height="800" loading="lazy"><span class="sample-play-icon" aria-hidden="true"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 4l9 6-9 6z" fill="currentColor"/></svg></span></button>
+            <div class="work-caption"><div><h3>Performance details</h3></div><button type="button" data-brief data-style="performance" aria-label="Start a video with performance product style">Use this look <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></button></div>
           </article></div>
         </div>
       </div>
-      <p class="sample-disclosure">Supplied style references · not client endorsements. Original brands and credits are retained. Reference lengths vary; the draft packages below are for 15–20 second videos.</p>
-      <div class="style-brief">
-        <div><label for="style-a">A direction to start with</label><select id="style-a" aria-label="Choose a video style"><option value="outdoor">Cinematic / outdoor</option><option value="tech">Product spotlight</option><option value="story">Brand story</option><option value="ugc">Social demo</option><option value="lifestyle">Everyday lifestyle</option><option value="performance">Performance details</option><option value="unsure">Help me choose</option></select></div>
-        <button id="style-brief-a" class="button button-outline" type="button" data-brief data-style="outdoor">Start my video <span aria-hidden="true">↗</span></button>
-      </div>
+
     </section>
 
-    <section class="service" aria-labelledby="service-title">
+    <section class="service" id="process" aria-labelledby="process-title">
       <div class="page-width service-inner">
-        <div class="service-title"><h2 id="service-title">You run<br>the shop.<br><span>We make<br>the cut.</span></h2></div>
-        <div class="service-content">
-          <p class="service-lead">One clear idea. A film that feels like your business.</p>
-          <p>For shop owners, small ecommerce brands and local businesses with something to show, but little time to turn it into a video.</p>
-          <div class="service-row"><span class="service-label">You bring</span><p>Product photos or clips, your key message, and any brand assets you want included.</p></div>
-          <div class="service-row"><span class="service-label">We handle</span><p>Direction, a short script or sequence, editing, titles or captions, and music.</p></div>
-          <div class="service-row"><span class="service-label">You receive</span><p>A 15–20 second video in one agreed publishing ratio, ready for the platform you choose.</p></div>
-          <p class="service-truth">Your product should stay recognisable. Any proposed generated scene or visual treatment is discussed before production.</p>
-        </div>
+        <div class="service-title"><h2 id="process-title">You bring<br>the product.<br><span>We make<br>the video.</span></h2></div>
+        <ol class="process-list">
+          <li><span class="step-number" aria-hidden="true">01</span><div><h3>Share your idea.</h3><p>A few words and the photos or clips you have. We’ll help you decide the rest.</p></div></li>
+          <li><span class="step-number" aria-hidden="true">02</span><div><h3>We make the video.</h3><p>Our team handles the story, edit, captions and music.</p></div></li>
+          <li><span class="step-number" aria-hidden="true">03</span><div><h3>Review, then post.</h3><p>Tell us what to adjust. Receive your finished videos, ready to share.</p></div></li>
+        </ol>
       </div>
     </section>
 
     <section class="packages page-width" id="packages" aria-labelledby="packages-title">
-      <div class="packages-heading"><h2 id="packages-title">Start small.<br>Find your rhythm.</h2><div class="pricing-note"><strong>Draft pricing · USD</strong><p>Suggested packages for this service concept.<br>Final scope and timing are confirmed in your quote.</p></div></div>
+      <div class="packages-heading"><h2 id="packages-title">Choose your package.</h2></div>
       <div class="price-grid">
-        <article class="price-plan"><p class="plan-number">01 / A first frame</p><h3>Single video</h3><p class="plan-price"><span data-price="single">$49</span><small>per package</small></p><p class="plan-purpose">An introduction, a new arrival, or one thing worth a closer look.</p><ul><li>1 video · 15–20 seconds</li><li>One publishing ratio</li><li>Titles or captions + music</li><li>One round of minor revisions</li></ul><button class="button button-outline" type="button" data-brief data-package="single">Start my video <span aria-hidden="true">↗</span></button></article>
-        <article class="price-plan plan-featured"><p class="plan-number">02 / Room to explore</p><h3>Campaign trio</h3><p class="plan-price"><span data-price="trio">$129</span><small>per package</small></p><p class="plan-purpose">Three moments around a launch, a collection, or one campaign.</p><ul><li>3 videos · 15–20 seconds each</li><li>One publishing ratio per video</li><li>Titles or captions + music</li><li>One round of minor revisions</li></ul><button class="button button-accent" type="button" data-brief data-package="trio">Request a quote <span aria-hidden="true">↗</span></button></article>
-        <article class="price-plan"><p class="plan-number">03 / Keep showing up</p><h3>Monthly rhythm</h3><p class="plan-price"><span data-price="monthly">$299</span><small>per package</small></p><p class="plan-purpose">A manageable set of films for a month of product and shop stories.</p><ul><li>8 videos · 15–20 seconds each</li><li>One publishing ratio per video</li><li>Titles or captions + music</li><li>One round of minor revisions</li></ul><button class="button button-outline" type="button" data-brief data-package="monthly">Plan my month <span aria-hidden="true">↗</span></button></article>
+        <article class="price-plan">
+          <h3>Single video</h3>
+          <p class="plan-price"><span data-price="single">$19</span><small>USD / package</small></p>
+          <p class="plan-purpose">Put one product, new arrival or special offer in the spotlight.</p>
+          <p class="plan-delivery"><strong>1 video</strong><span>15–20 seconds</span></p>
+          <button class="button button-outline" type="button" data-brief data-package="single">Start my video <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></button>
+        </article>
+        <article class="price-plan plan-featured">
+          <h3>Campaign duo</h3>
+          <p class="plan-price"><span data-price="duo">$29</span><small>USD / package</small></p>
+          <p class="plan-purpose">Show what it is, how it works and why it matters. Two videos for one launch.</p>
+          <p class="plan-delivery"><strong>2 videos</strong><span>Up to 60 seconds each</span></p>
+          <button class="button button-accent" type="button" data-brief data-package="duo">Start my video <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></button>
+        </article>
+        <article class="price-plan">
+          <h3>Monthly content</h3>
+          <p class="plan-price"><span data-price="monthly">$49</span><small>USD / package</small></p>
+          <p class="plan-purpose">Keep your feed active with products, offers and everyday moments throughout the month.</p>
+          <p class="plan-delivery"><strong>4 videos</strong><span>Up to 60 seconds each</span></p>
+          <button class="button button-outline" type="button" data-brief data-package="monthly">Start my video <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></button>
+        </article>
       </div>
-      <div class="package-footnotes"><p>Monthly work is arranged manually, with no automatic renewal.</p><p>Specialist voiceover, actors, complex 3D and new filming are quoted separately. We confirm timing with your quote.</p></div>
-    </section>
-
-    <section class="process page-width" id="process" aria-labelledby="process-title">
-      <div class="process-heading"><h2 id="process-title">From your folder.<br>To their feed.</h2><p>A straightforward conversation,<br>then a considered edit.</p></div>
-      <ol class="process-list">
-        <li><span class="step-number">01</span><h3>Give us the idea.</h3><p>Tell us what you sell, what the video should do, and where it will appear.</p></li>
-        <li><span class="step-number">02</span><h3>Share the material.</h3><p>Send a link to your photos, clips and brand assets. We agree scope, price and timing.</p></li>
-        <li><span class="step-number">03</span><h3>See the first cut.</h3><p>We shape the sequence, edit the video, and share a draft for your review.</p></li>
-        <li><span class="step-number">04</span><h3>Make it yours.</h3><p>One focused round of minor changes, then your finished file in the agreed format.</p></li>
-      </ol>
-      <p class="process-timing">Payment arrangements and delivery timing are confirmed with your quote before production begins.</p>
+      <p class="package-includes">Every package includes captions, music, one format per video and one round of minor revisions.</p>
     </section>
 
     <section class="faq page-width" aria-labelledby="faq-title">
-      <div class="faq-title"><h2 id="faq-title">Before<br>the first cut.</h2><p>A few things to make the brief easier.</p></div>
+      <div class="faq-title"><h2 id="faq-title">Ready when<br>you are.</h2><button class="button button-accent" type="button" data-brief>Start my video <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></button></div>
       <div class="faq-list">
-        <details><summary>What if I only have a few product photos?</summary><p>That is a useful place to start. Share what you have and tell us the message. We review the material and propose a workable direction before confirming the quote.</p></details>
-        <details><summary>Are the sample films your client projects?</summary><p>They are supplied style references for this concept. They show visual directions and pacing, and do not establish a client relationship or production ownership. Original brands and credits are retained.</p></details>
-        <details><summary>Will the video show my actual product?</summary><p>We work from the material you supply and keep product appearance and claims accurate. If a generated scene or other visual treatment would help, we discuss it with you before production.</p></details>
-        <details><summary>How long does delivery take?</summary><p>We confirm timing with your quote after reviewing your material and scope. You can include a preferred date in the brief, and we will tell you whether it is workable.</p></details>
-        <details><summary>Can I request changes or an extra format?</summary><p>The draft packages include one round of minor revisions and one publishing ratio per video. A new concept, significant reshoot, or extra version is scoped and quoted separately.</p></details>
-        <details><summary>What do I need to share or have permission to use?</summary><p>Share a link to the material rather than uploading it here. Please use photos, clips, logos, music and appearances you are entitled to use. We confirm any additional music or media choices before the final edit.</p></details>
+        <details><summary>Can I start with just photos?</summary><p>Yes. Send the product photos you have, or a link to your shop. Our team will help you choose a direction.</p></details>
+        <details><summary>When will my video be ready?</summary><p>We’ll confirm a delivery date after reviewing your idea and materials. If you have a deadline, mention it in your brief.</p></details>
+        <details><summary>Can I request changes?</summary><p>Yes. Every package includes one round of minor revisions, so you can refine the first cut before the final delivery.</p></details>
       </div>
     </section>
-
-    <section class="closing" aria-labelledby="closing-title"><div class="page-width closing-inner"><p>Something good starts with a small brief.</p><h2 id="closing-title">Let’s make something<br><span>worth watching.</span></h2><div class="closing-action"><button class="closing-button" type="button" data-brief>Start my video <span aria-hidden="true">↗</span></button><p>Prepare your brief, then copy or download it.<br>Nothing is sent from this prototype.</p></div></div></section>
   </main>
-  <footer class="site-footer page-width"><a class="wordmark" href="#top">promoready<span class="wordmark-period">.</span></a><p>Independent brand video · Service concept<br>Draft pricing · Supplied style references</p><a href="#top">Back to top <span aria-hidden="true">↑</span></a></footer>
+  <footer class="site-footer page-width"><a class="wordmark" href="#top">promoready<span class="wordmark-period">.</span></a><a class="contact-email" href="mailto:garyczs015@gmail.com">garyczs015@gmail.com</a><a href="#top">Back to top <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m6 10 6-6 6 6M12 4v16"/></svg></a></footer>
   <script src="site-config.js"></script>
+  <script src="inquiry.js"></script>
   <script src="shared.js"></script>
   <script src="version-a.js"></script>
 </body>

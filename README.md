@@ -1,9 +1,9 @@
-# promoready — original A concept
+# promoready
 
-Static presentation of the original A design, with six supplied style-reference videos playing inline.
+English video production website. Live at https://saber0015.github.io/promoready/.
 
-The package prices are draft suggestions. The brief form prepares text locally; no email, upload service or payment processing is connected. Supplied references are not promoready client work or endorsements.
+Packages: 1 video for $19 (15–20 seconds), 2 videos for $29 and 4 videos for $49 (up to 60 seconds each). Videos play inline.
 
-Publish the `main` branch root with GitHub Pages. `.nojekyll` keeps the HTML, CSS, JavaScript, fonts and media unchanged.
+Contact: garyczs015@gmail.com. The two-field inquiry form uses FormSubmit. The recipient must activate the form before direct email delivery; a mailto link is available as a fallback. `site-config.js` contains the public recipient and package configuration.
 
-Font licenses are in `licenses/`.
+Static HTML/CSS/JavaScript, self-hosted DM Sans, no build step. Publish main from the repository root. Font license: licenses/dm-sans-OFL.txt.

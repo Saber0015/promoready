@@ -1,25 +1,20 @@
 (() => {
   'use strict';
-  const styleSelect = document.getElementById('style-a');
-  const briefButton = document.getElementById('style-brief-a');
-  if (styleSelect && briefButton) styleSelect.addEventListener('change', () => { briefButton.dataset.style = styleSelect.value; });
   if (document.body.dataset.playback !== 'inline') return;
 
   // Keep the keyboard reading order aligned with the mobile film-first layout.
   const heroCopy = document.querySelector('.hero-copy');
   const heroFrame = document.querySelector('.hero-frame');
   const heroCta = heroCopy?.querySelector('.button');
-  const heroDetail = heroCopy?.querySelector('.hero-detail');
-  if (heroCopy && heroFrame && heroCta && heroDetail) {
+  if (heroCopy && heroFrame && heroCta) {
     heroCta.classList.add('hero-cta');
     const mobileLayout = window.matchMedia('(max-width: 520px)');
     function placeHeroActions() {
       const focused = document.activeElement;
       if (mobileLayout.matches) {
         heroFrame.after(heroCta);
-        heroCta.after(heroDetail);
       } else {
-        heroCopy.append(heroDetail,heroCta);
+        heroCopy.append(heroCta);
       }
       if (focused === heroCta) heroCta.focus({preventScroll:true});
     }
@@ -29,12 +24,12 @@
   }
 
   const clips = {
-    outdoor:{ratio:'2.33 / 1',label:'Outdoor cinematic style reference'},
-    ugc:{ratio:'9 / 16',label:'Conversational beauty product style reference'},
-    tech:{ratio:'16 / 9',label:'Technical product style reference'},
-    story:{ratio:'16 / 9',label:'Brand story style reference'},
-    lifestyle:{ratio:'9 / 16',label:'Everyday lifestyle style reference'},
-    performance:{ratio:'3 / 4',label:'Performance product style reference'}
+    outdoor:{ratio:'2.33 / 1',label:'Outdoor cinematic film'},
+    ugc:{ratio:'9 / 16',label:'Conversational beauty product film'},
+    tech:{ratio:'16 / 9',label:'Technical product film'},
+    story:{ratio:'16 / 9',label:'Brand story film'},
+    lifestyle:{ratio:'9 / 16',label:'Everyday lifestyle film'},
+    performance:{ratio:'3 / 4',label:'Performance product film'}
   };
   const players = [];
   function pauseOthers(current) { players.forEach(player => { if (player.video !== current) player.video.pause(); }); }
@@ -141,7 +136,7 @@
   });
 
   document.addEventListener('click',event => {
-    if (event.target.closest('[data-brief],[data-notes]')) pauseOthers(null);
+    if (event.target.closest('[data-brief]')) pauseOthers(null);
   },true);
   document.addEventListener('visibilitychange',() => { if (document.hidden) pauseOthers(null); });
   if ('IntersectionObserver' in window) {

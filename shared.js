@@ -1,91 +1,199 @@
 (() => {
   'use strict';
-  const cfg = window.SITE_CONFIG || {brand:'promoready',email:'',paypalUrl:'',prices:{single:49,trio:129,monthly:299}};
-  const references = {
-    ugc:{title:'Beauty · conversational product demo',time:'23.50 sec',ratio:'9:16',src:'ugc',style:'Conversational product demo'},
-    outdoor:{title:'Outdoor · cinematic brand mood',time:'25.01 sec',ratio:'2.33:1',src:'outdoor',style:'Cinematic brand mood'},
-    tech:{title:'Technology · product detail',time:'30.36 sec',ratio:'16:9',src:'tech',style:'Product detail'},
-    story:{title:'Lifestyle · brand storytelling',time:'30.60 sec',ratio:'16:9',src:'story',style:'Brand storytelling'},
-    lifestyle:{title:'Footwear · everyday product story',time:'16.34 sec',ratio:'9:16',src:'lifestyle',style:'Everyday product story'},
-    performance:{title:'Footwear · technical close-up',time:'50.13 sec',ratio:'3:4',src:'performance',style:'Technical close-up'}
-  };
-  const packages = {single:'Single video · 1 × 15–20 sec',trio:'Campaign trio · 3 × 15–20 sec',monthly:'Monthly rhythm · 8 × 15–20 sec'};
-  const html = `<a class="pr-skip" href="#main">Skip to content</a>
-  <dialog class="pr-dialog pr-reference-dialog" id="pr-video-dialog" aria-labelledby="pr-video-title">
-    <div class="pr-dialog-top"><h2 id="pr-video-title">Style reference</h2><button type="button" class="pr-close" data-close aria-label="Close video">×</button></div>
-    <video controls playsinline preload="none" id="pr-video" aria-label="Play supplied style reference"></video>
-    <div class="pr-reference-caption"><div><p id="pr-video-meta"></p><p>Supplied style reference, not a promoready client project or endorsement.</p></div><button type="button" class="pr-button" id="pr-use-style" data-brief>Use this style ↗</button><p hidden id="pr-video-error" class="pr-error" role="status">This video could not load. Close it and try again.</p></div>
-  </dialog>
-  <dialog class="pr-dialog" id="pr-brief-dialog" aria-labelledby="pr-brief-title">
-    <div class="pr-dialog-top"><h2 id="pr-brief-title">Start with a simple brief.</h2><button type="button" class="pr-close" data-close aria-label="Close brief">×</button></div>
-    <div class="pr-dialog-content"><p>Tell us what you want to promote. The scope, price and delivery date are confirmed before production.</p>
-      <div class="pr-draft-note">Concept preview: this form prepares a brief on your device. Nothing is uploaded, sent or charged.</div>
-      <form id="pr-brief-form">
-        <div class="pr-form-grid">
-          <label class="pr-field">Business name<input required name="business" autocomplete="organization" placeholder="Your shop or brand" maxlength="120"></label>
-          <label class="pr-field">Your email<input required type="email" name="email" autocomplete="email" placeholder="you@yourbusiness.com" maxlength="180"></label>
-          <label class="pr-field">Package<select name="package"><option value="single">Single video · $${cfg.prices.single} draft</option><option value="trio">Campaign trio · $${cfg.prices.trio} draft</option><option value="monthly">Monthly rhythm · $${cfg.prices.monthly} draft</option></select></label>
-          <label class="pr-field">Where will you post?<select name="format"><option>Vertical · 9:16</option><option>Landscape · 16:9</option><option>Square · 1:1</option><option>Help me choose</option></select></label>
-          <label class="pr-field full">What are you promoting?<textarea required name="goal" placeholder="A new product, a weekend offer, or something your customers should know." maxlength="1800"></textarea></label>
-          <label class="pr-field">Website (optional)<input type="url" name="website" placeholder="https://yourbusiness.com" maxlength="500"></label>
-          <label class="pr-field">Asset sharing link (optional)<input type="url" name="assets" placeholder="https://…" maxlength="1000"><small>Link to your photos or clips. You can also share them later by email.</small></label>
-          <label class="pr-field">Preferred style<input name="style" value="Help me choose" maxlength="160"></label>
-          <label class="pr-field">When do you need it?<input name="deadline" placeholder="A date, or flexible" maxlength="120"><small>Timing is agreed with your quote.</small></label>
-          <label class="pr-field-check"><input required type="checkbox" name="permission"><span>I can share assets that I own or have permission to use.</span></label>
-        </div>
-        <div class="pr-form-bottom"><button type="submit" class="pr-button">Prepare my brief ↗</button><small>Suggested scope: one output ratio and one round of minor revisions per video. Final terms are agreed in your quote.</small></div>
-      </form>
-      <section class="pr-result" id="pr-result" aria-labelledby="pr-result-title" hidden>
-        <h3 id="pr-result-title">Your brief is ready to review.</h3><p>Nothing has been sent. Copy or save this brief for the quote conversation.</p>
-        <pre id="pr-brief-text"></pre>
-        <div class="pr-result-actions"><button type="button" class="pr-button" id="pr-copy">Copy brief</button><a class="pr-button secondary" id="pr-download" download="promoready-video-brief.txt">Save brief</a><a class="pr-button secondary" id="pr-email" hidden>Open email draft</a><button class="pr-button secondary" type="button" id="pr-payment-toggle" aria-expanded="false" aria-controls="pr-payment">View payment step</button></div>
-        <p id="pr-copy-status" role="status"></p>
-        <section class="pr-payment" id="pr-payment" hidden><h3>Confirm first. Pay next.</h3><ol><li>Agree the material, video scope, price and delivery date by email.</li><li>Receive the confirmed payment request.</li><li>Review your video, then receive the agreed final files.</li></ol><p class="pr-payment-state">Preview only: the contact address and PayPal checkout are placeholders awaiting setup. No payment can be taken here.</p><a id="pr-paypal" class="pr-button" target="_blank" rel="noopener noreferrer" hidden>Open PayPal</a></section>
-      </section>
-    </div>
-  </dialog>
-`;
-  document.body.insertAdjacentHTML('beforeend',html);
-  const version=document.body.dataset.version;
-  document.querySelector(`[data-version-link="${version}"]`)?.setAttribute('aria-current','page');
-  document.querySelectorAll('[data-price]').forEach(el=>{if(cfg.prices[el.dataset.price])el.textContent='$'+cfg.prices[el.dataset.price];});
-  if(!document.getElementById('main'))document.querySelector('main')?.setAttribute('id','main');
-  const videoDialog=document.getElementById('pr-video-dialog');
-  const briefDialog=document.getElementById('pr-brief-dialog');
-  const video=document.getElementById('pr-video');
-  const form=document.getElementById('pr-brief-form');
-  function show(dialog,source){dialog._prOpener=source;document.querySelectorAll('dialog[open]').forEach(d=>d.close());dialog.showModal();}
-  document.querySelectorAll('.pr-dialog').forEach(dialog=>{
-    dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();}});
-    dialog.addEventListener('close',()=>{if(dialog===videoDialog){video.pause();video.removeAttribute('src');video.load();}if(!document.querySelector('dialog[open]'))dialog._prOpener?.focus({preventScroll:true});});
-    dialog.querySelector('[data-close]').addEventListener('click',()=>dialog.close());
+  const cfg = window.SITE_CONFIG;
+  const looks = {outdoor:'Cinematic',tech:'Product spotlight',ugc:'Social demo',lifestyle:'Everyday lifestyle',story:'Brand story',performance:'Performance details'};
+  document.querySelectorAll('[data-price]').forEach(node => {
+    const plan = cfg.plans[node.dataset.price];
+    if (plan) node.textContent = `$${plan.price}`;
   });
-  video.addEventListener('error',()=>{if(videoDialog.open&&video.getAttribute('src'))document.getElementById('pr-video-error').hidden=false;});
-  document.addEventListener('click',e=>{
-    const play=e.target.closest('[data-play]');
-    if(play && document.body.dataset.playback !== "inline"){const ref=references[play.dataset.play];if(!ref)return;document.getElementById('pr-video-title').textContent=ref.title;document.getElementById('pr-video-meta').textContent=`${ref.time} · ${ref.ratio} · Supplied style reference`;document.getElementById('pr-use-style').dataset.style=ref.style;document.getElementById('pr-video-error').hidden=true;video.poster='assets/'+ref.src+'.jpg';show(videoDialog,play);video.src='assets/'+ref.src+'.mp4';video.load();video.play().catch(()=>{});return;}
-    const brief=e.target.closest('[data-brief]');
-    if(brief){if(brief.dataset.package&&packages[brief.dataset.package])form.elements.package.value=brief.dataset.package;if(brief.dataset.style)form.elements.style.value=references[brief.dataset.style]?.style||(brief.dataset.style==='unsure'?'Help me choose':brief.dataset.style);document.getElementById('pr-result').hidden=true;document.getElementById('pr-payment').hidden=true;document.getElementById('pr-payment-toggle').setAttribute('aria-expanded','false');show(briefDialog,brief);return;}
+  document.body.insertAdjacentHTML('beforeend', `
+    <dialog class="brief-dialog" id="brief-dialog" aria-labelledby="brief-title" aria-describedby="brief-intro">
+      <div class="brief-header">
+        <h2 id="brief-title">Let’s start your video.</h2>
+        <button class="brief-close" type="button" aria-label="Close brief"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+      </div>
+      <div class="brief-body">
+        <p class="brief-intro" id="brief-intro">Our team will get back to you as soon as possible and help you every step of the way.</p>
+        <form id="brief-form">
+          <label class="brief-honey" aria-hidden="true">Leave this field empty<input name="_honey" id="brief-honey" type="text" tabindex="-1" autocomplete="off"></label>
+          <div class="brief-context" id="brief-context" hidden><p id="brief-selection"></p><button type="button" class="brief-text-button" id="brief-clear">Clear selection</button></div>
+          <label class="brief-field" for="brief-email">Your email<input id="brief-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="you@yourbusiness.com" maxlength="254" required autofocus></label>
+          <label class="brief-field" for="brief-idea">What would you like to promote?<textarea id="brief-idea" name="idea" rows="4" maxlength="4000" placeholder="A few words about your product or idea. You can paste a shop, photo or video link here too." required></textarea></label>
+          <button class="brief-button" id="brief-submit" type="submit"><span id="brief-submit-label">Send my inquiry</span><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></button>
+          <p class="brief-feedback" id="brief-feedback" role="status" aria-live="polite" hidden></p>
+          <p class="brief-direct">Or email <a class="brief-contact" id="brief-fallback">our team</a> directly.</p>
+        </form>
+        <section class="brief-result" id="brief-result" aria-labelledby="brief-result-title" hidden>
+          <h3 id="brief-result-title" tabindex="-1">Thank you. Your inquiry is on its way.</h3>
+          <p>Our team will reply to your email as soon as possible. You can also reach us at <a class="brief-contact" id="brief-send">our team</a>.</p>
+          <p class="brief-reference" id="brief-reference"></p>
+          <pre id="brief-summary" tabindex="0" aria-label="Prepared video brief"></pre>
+          <div class="brief-actions"><button class="brief-button" id="brief-copy" type="button">Copy brief</button><button class="brief-button brief-secondary" id="brief-save" type="button">Save brief</button></div>
+          <p class="brief-status" id="brief-status" role="status" aria-live="polite"></p>
+          <button class="brief-text-button" id="brief-edit" type="button">Start another inquiry</button>
+        </section>
+      </div>
+    </dialog>`);
+  const $ = id => document.getElementById(id);
+  const dialog = $('brief-dialog'), form = $('brief-form'), email = $('brief-email'), idea = $('brief-idea');
+  const context = $('brief-context'), selection = $('brief-selection'), result = $('brief-result');
+  const resultTitle = $('brief-result-title'), summary = $('brief-summary'), status = $('brief-status');
+  const sendLink = $('brief-send');
+  const fallbackLink = $('brief-fallback'), feedback = $('brief-feedback'), submit = $('brief-submit');
+  const submitLabel = $('brief-submit-label'), honey = $('brief-honey');
+  sendLink.textContent = cfg.email;
+  sendLink.href = `mailto:${cfg.email}`;
+  fallbackLink.textContent = cfg.email;
+  fallbackLink.href = `mailto:${cfg.email}`;
+  let chosenPlan = '', chosenLook = '', opener = null, briefText = '';
+  let submitting = false, lastSentSignature = '', lastReference = '';
+
+  function prepareBrief() {
+    const text = [`${cfg.brand} — Video brief`, `Reply email: ${email.value.trim()}`, selectionText() || 'Package and look: Help me choose.', `Idea / links:\n${idea.value.trim()}`].join('\n\n');
+    const href = `mailto:${cfg.email}?subject=${encodeURIComponent('My promoready video brief')}&body=${encodeURIComponent(text)}`;
+    sendLink.href = href;
+    fallbackLink.href = href;
+    return text;
+  }
+  function showResult(reference) {
+    summary.textContent = briefText;
+    $('brief-reference').textContent = `Reference: ${reference}`;
+    form.hidden = true;
+    result.hidden = false;
+    status.textContent = '';
+    if (dialog.open) { resultTitle.focus({preventScroll:true}); dialog.scrollTop = 0; }
+  }
+
+  function selectionText() {
+    const plan = cfg.plans[chosenPlan];
+    return [plan ? `${plan.name} · $${plan.price} USD / package\n${plan.count} ${plan.count === 1 ? 'video' : 'videos'} · ${plan.duration}` : '', chosenLook ? `Look: ${looks[chosenLook]}` : ''].filter(Boolean).join('\n');
+  }
+  function updateSelection() {
+    selection.textContent = selectionText();
+    context.hidden = !selection.textContent;
+  }
+  function showForm() {
+    result.hidden = true;
+    form.hidden = false;
+    status.textContent = '';
+    feedback.hidden = true;
+    updateSelection();
+  }
+  document.addEventListener('click', event => {
+    const trigger = event.target.closest('[data-brief]');
+    if (!trigger) return;
+    if (submitting) { opener = trigger; dialog.showModal(); document.body.classList.add('brief-open'); return; }
+    if (cfg.plans[trigger.dataset.package]) chosenPlan = trigger.dataset.package;
+    if (looks[trigger.dataset.style]) chosenLook = trigger.dataset.style;
+    opener = trigger;
+    showForm();
+    prepareBrief();
+    dialog.showModal();
+    document.body.classList.add('brief-open');
+    email.focus({preventScroll:true});
   });
-  let briefText='';
-  form.addEventListener('submit',e=>{
-    e.preventDefault();
-    const fd=new FormData(form);const plan=fd.get('package');
-    briefText=[`${cfg.brand} — Video brief`,`Business: ${fd.get('business')}`,`Reply email: ${fd.get('email')}`,`Package: ${packages[plan]}`,`Draft package price: $${cfg.prices[plan]} USD, subject to confirmed quote`,`Publishing format: ${fd.get('format')}`,`Goal: ${fd.get('goal')}`,`Website: ${fd.get('website')||'To be shared'}`,`Asset link: ${fd.get('assets')||'To be shared by email'}`,`Style: ${fd.get('style')||'Help me choose'}`,`Preferred deadline: ${fd.get('deadline')||'Flexible; please confirm timing'}`,'Asset permission: confirmed by the requester.','Suggested scope: one output ratio and one round of minor revisions per video.','Please confirm materials, final scope, price and delivery date before production.','Prepared locally for review. Nothing has been sent or paid.'].join('\n\n');
-    document.getElementById('pr-brief-text').textContent=briefText;
-    document.getElementById('pr-download').href='data:text/plain;charset=utf-8,'+encodeURIComponent(briefText);
-    document.getElementById('pr-result').hidden=false;
-    document.getElementById('pr-copy-status').textContent='';
-    const mail=document.getElementById('pr-email');
-    if(cfg.email&&/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cfg.email)){mail.href='mailto:'+encodeURIComponent(cfg.email)+'?subject='+encodeURIComponent('Video brief — '+fd.get('business'))+'&body='+encodeURIComponent(briefText);mail.hidden=false;}
-    document.getElementById('pr-result-title').setAttribute('tabindex','-1');document.getElementById('pr-result-title').focus({preventScroll:true});
-    briefDialog.scrollTo({top:briefDialog.scrollHeight,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+  dialog.querySelector('.brief-close').addEventListener('click', () => dialog.close());
+  // Close only if the press starts and ends on the backdrop.
+  let backdropPress = false;
+  function isBackdrop(event) {
+    const box = dialog.getBoundingClientRect();
+    return event.target === dialog && (event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom);
+  }
+  dialog.addEventListener('pointerdown', event => { backdropPress = isBackdrop(event); });
+  dialog.addEventListener('click', event => {
+    if (backdropPress && isBackdrop(event)) dialog.close();
+    backdropPress = false;
   });
-  document.getElementById('pr-copy').addEventListener('click',async()=>{
-    let copied=false;
-    try{if(navigator.clipboard?.writeText){await navigator.clipboard.writeText(briefText);copied=true;}}catch{}
-    if(!copied){const field=document.createElement('textarea');field.value=briefText;field.style.cssText='position:fixed;left:-10000px;top:0';document.body.append(field);field.select();try{copied=document.execCommand('copy');}catch{}field.remove();}
-    document.getElementById('pr-copy-status').textContent=copied?'Brief copied. Nothing has been sent.':'Copy is unavailable in this browser. Use Save brief.';
+  dialog.addEventListener('close', () => {
+    document.body.classList.remove('brief-open');
+    opener?.focus({preventScroll:true});
   });
-  document.getElementById('pr-payment-toggle').addEventListener('click',e=>{const section=document.getElementById('pr-payment');section.hidden=!section.hidden;e.currentTarget.setAttribute('aria-expanded',String(!section.hidden));if(cfg.paypalUrl&&cfg.paypalUrl.startsWith('https://')){document.getElementById('pr-paypal').href=cfg.paypalUrl;document.getElementById('pr-paypal').hidden=false;section.querySelector('.pr-payment-state').textContent='Pay only after confirming your quote. This link opens the configured checkout; this page does not process payment.';}});
+  $('brief-clear').addEventListener('click', () => {
+    chosenPlan = '';
+    chosenLook = '';
+    updateSelection();
+    prepareBrief();
+    email.focus({preventScroll:true});
+  });
+  idea.addEventListener('input', () => idea.setCustomValidity(''));
+  email.addEventListener('input', prepareBrief);
+  idea.addEventListener('input', prepareBrief);
+  form.addEventListener('submit', async event => {
+    event.preventDefault();
+    if (submitting) return;
+    idea.setCustomValidity(idea.value.trim() ? '' : 'Tell us a little about your product or idea.');
+    if (!form.reportValidity()) return;
+    briefText = prepareBrief();
+    if (lastSentSignature === briefText) { showResult(lastReference); return; }
+    if (honey.value) return;
+    const reference = 'PR-' + crypto.randomUUID().slice(0,8).toUpperCase();
+    const payload = {
+      email: email.value.trim(), _replyto: email.value.trim(), message: idea.value.trim(),
+      package: selectionText() || 'Help me choose', reference,
+      _subject: `promoready inquiry ${reference}`, _honey: honey.value
+    };
+    submitting = true;
+    submit.disabled = true;
+    email.readOnly = true;
+    idea.readOnly = true;
+    $('brief-clear').disabled = true;
+    submitLabel.textContent = 'Sending…';
+    form.setAttribute('aria-busy','true');
+    feedback.hidden = true;
+    try {
+      await window.PROMOREADY_INQUIRY.send(payload);
+      lastSentSignature = briefText;
+      lastReference = reference;
+      showResult(reference);
+    } catch (error) {
+      feedback.textContent = error.code === 'activation'
+        ? 'Please email us directly while we activate online submissions. Your details are still here.'
+        : 'We couldn’t confirm your submission. Your details are still here. Please try again, or email us directly below.';
+      feedback.hidden = false;
+      if (dialog.open) feedback.scrollIntoView({block:'nearest'});
+    } finally {
+      submitting = false;
+      submit.disabled = false;
+      email.readOnly = false;
+      idea.readOnly = false;
+      $('brief-clear').disabled = false;
+      submitLabel.textContent = 'Send my inquiry';
+      form.removeAttribute('aria-busy');
+    }
+  });
+  $('brief-edit').addEventListener('click', () => {
+    idea.value = '';
+    idea.setCustomValidity('');
+    showForm();
+    prepareBrief();
+    idea.focus({preventScroll:true});
+  });
+  $('brief-copy').addEventListener('click', async () => {
+    try {
+      if (!navigator.clipboard?.writeText) throw new Error('Clipboard unavailable');
+      await navigator.clipboard.writeText(briefText);
+      status.textContent = 'Brief copied.';
+    } catch {
+      // Native selection keeps copying available in local file previews.
+      const range = document.createRange();
+      range.selectNodeContents(summary);
+      const selected = window.getSelection();
+      selected.removeAllRanges();
+      selected.addRange(range);
+      summary.focus({preventScroll:true});
+      const shortcut = /Mac|iPhone|iPad/.test(navigator.platform) ? '⌘C' : 'Ctrl+C';
+      status.textContent = `Your brief is selected. Press ${shortcut} to copy, or choose Save brief.`;
+    }
+  });
+  $('brief-save').addEventListener('click', () => {
+    const url = URL.createObjectURL(new Blob([briefText], {type:'text/plain;charset=utf-8'}));
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'promoready-video-brief.txt';
+    dialog.append(link);
+    link.click();
+    link.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    status.textContent = 'Your brief is ready to save to your device.';
+  });
 })();
