@@ -4,7 +4,7 @@
   const looks = {outdoor:'Cinematic',tech:'Product spotlight',ugc:'Social demo',lifestyle:'Everyday lifestyle',story:'Brand story',performance:'Performance details'};
   document.querySelectorAll('[data-price]').forEach(node => {
     const plan = cfg.plans[node.dataset.price];
-    if (plan) node.textContent = `$${plan.price}`;
+    if (Number.isFinite(plan?.price)) node.textContent = `$${plan.price}`;
   });
   document.body.insertAdjacentHTML('beforeend', `
     <dialog class="brief-dialog" id="brief-dialog" aria-labelledby="brief-title" aria-describedby="brief-intro">
@@ -41,6 +41,7 @@
   const sendLink = $('brief-send');
   const fallbackLink = $('brief-fallback'), feedback = $('brief-feedback'), submit = $('brief-submit');
   const submitLabel = $('brief-submit-label'), honey = $('brief-honey');
+  const defaultIdeaPlaceholder = idea.placeholder;
   sendLink.textContent = cfg.email;
   sendLink.href = `mailto:${cfg.email}`;
   fallbackLink.textContent = cfg.email;
@@ -66,11 +67,17 @@
 
   function selectionText() {
     const plan = cfg.plans[chosenPlan];
-    return [plan ? `${plan.name} · $${plan.price} USD / package\n${plan.count} ${plan.count === 1 ? 'video' : 'videos'} · ${plan.duration}` : '', chosenLook ? `Look: ${looks[chosenLook]}` : ''].filter(Boolean).join('\n');
+    const planText = !plan ? '' : plan.pricing === 'quote'
+      ? `${plan.name} · Quote on request\n${plan.duration}`
+      : `${plan.name} · $${plan.price} USD / package\n${plan.count} ${plan.count === 1 ? 'video' : 'videos'} · ${plan.duration}`;
+    return [planText, chosenLook ? `Look: ${looks[chosenLook]}` : ''].filter(Boolean).join('\n');
   }
   function updateSelection() {
     selection.textContent = selectionText();
     context.hidden = !selection.textContent;
+    idea.placeholder = chosenPlan === 'custom'
+      ? 'Tell us about your video and the length you have in mind. Add a shop, photo or video link if you have one.'
+      : defaultIdeaPlaceholder;
   }
   function showForm() {
     result.hidden = true;
