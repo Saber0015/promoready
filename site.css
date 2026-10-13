@@ -407,7 +407,7 @@ img { display: block; max-width: 100%; }
   .plan-price > span { font-size: 3.625rem; }
   .plan-price { margin-block: 1rem 1.5rem; }
   .plan-purpose { margin-bottom: 1.5rem; }
-  .plan-delivery { margin-bottom: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--page-line); }
+  .plan-delivery { align-self: stretch; margin-bottom: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--page-line); }
   .price-plan .button { width: auto; align-self: start; min-width: 13rem; }
   .package-includes { margin-top: 2rem; }
   .custom-plan { margin-top: 2rem; padding: 1.5rem; }
